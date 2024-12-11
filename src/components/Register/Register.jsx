@@ -148,7 +148,7 @@ export default function Register() {
 
         {resMessage != null ? <div className="successDiv">
 
-          <p><span>Success alert!</span> now you can <Link to="login" className='text-green-500 hover:text-green-700 font-bold'>Login</Link></p>
+          <p><span>Success alert!</span> now you can <Link to="/login" className='text-green-500 hover:text-green-700 font-bold'>Login</Link></p>
         </div> : ""
         }
 
