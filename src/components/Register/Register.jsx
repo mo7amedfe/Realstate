@@ -28,13 +28,13 @@ export default function Register() {
       errors.password = "Password must be at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character."
     }
     if (!values.rePassword) {
-      errors.rePassword = "RePassword is required"
+      errors.rePassword = "rePassword is required"
     } else if (values.password != values.rePassword) {
       errors.rePassword = "password not match"
     }
 
     if (!values.phone) {
-      errors.phone = "Phone is required"
+      errors.phone = "phone is required"
     } else if (!/^(002)?01[0125][0-9]{8}$/i.test(values.phone)) {
       errors.phone = "Invalid phone number."
     }
@@ -50,6 +50,7 @@ export default function Register() {
       password: "",
       rePassword: "",
       phone: ""
+
     },
 
     validate,
@@ -68,11 +69,16 @@ export default function Register() {
 
   async function register(values) {
     setIsLoading(true)
-    return await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values).then((res) => {
+    // return await axios.post("http://localhost:5000/api/users/register", values).then((res) => {
+    return await axios.post(" https://ecommerce.routemisr.com/api/v1/auth/signup", values).then((res) => {
+
+     
       console.log(res)
       setResMessage(res.data.message)
       setIsLoading(false)
     }).catch((e) => {
+      console.log(e);
+      
       console.log(e.response.data.message)
       setError(e.response.data.message)
       setIsLoading(false)
@@ -115,7 +121,7 @@ export default function Register() {
 
           </div> : ""}
 
-        <label htmlFor="">RePassword</label>
+        <label htmlFor="">rePassword</label>
         <input type="password" name='rePassword' value={formik.values.rePassword} onClick={() => { setError(null), setResMessage(null) }} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='********' required />
         {formik.touched.rePassword && formik.errors.rePassword ?
           <div className='errorDiv'>
@@ -124,7 +130,7 @@ export default function Register() {
 
           </div> : ""}
 
-        <label htmlFor="">Phone</label>
+        <label htmlFor="">phone</label>
         <input type="tel" name='phone' value={formik.values.phone} onClick={() => { setError(null), setResMessage(null) }} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='+## ###########' required />
         {formik.touched.phone && formik.errors.phone ?
           <div className='errorDiv'>
@@ -148,7 +154,7 @@ export default function Register() {
 
         {resMessage != null ? <div className="successDiv">
 
-          <p><span>Success alert!</span> now you can <Link to="login" className='text-green-500 hover:text-green-700 font-bold'>Login</Link></p>
+          <p><span>Success alert!</span> now you can <Link to="/login" className='text-green-500 hover:text-green-700 font-bold'>Login</Link></p>
         </div> : ""
         }
 
@@ -156,6 +162,7 @@ export default function Register() {
 
 
     </form>
+    <h5 className="">If you already have an account, <Link className='text-green' to="/login">Login Now</Link></h5>
 
   </div>
 
