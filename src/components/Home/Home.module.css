@@ -17,6 +17,7 @@
 .items {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     box-sizing: border-box;
     padding-top: 10px;
 }
@@ -59,7 +60,7 @@
 }
 
 .addCard {
-    width: 17%;
+    width: 22%;
     padding: 10px;
     margin:3px 0px ;
     /* background-color: blueviolet; */
@@ -86,3 +87,29 @@
 .addCard:hover {
     background-color: rgb(43, 197, 43);
 }
+
+@media (max-width: 993px) {
+    .addCard {
+      width: 28%; /* Adjust to fit two cards in a row */
+      padding: 8px;
+      margin: 5px;
+    }
+  }
+
+/* For tablets and medium-sized screens (768px and below) */
+@media (max-width: 768px) {
+    .addCard {
+      width: 40%; /* Adjust to fit two cards in a row */
+      padding: 8px;
+      margin: 5px;
+    }
+  }
+  
+  /* For mobile screens (480px and below) */
+  @media (max-width: 480px) {
+    .addCard {
+      width: 100%; /* Adjust to fit one card in a row */
+      padding: 5px;
+      margin: 10px auto; /* Center the card */
+    }
+  }

@@ -9,6 +9,7 @@ import Layout from './components/Layout/Layout.jsx'
 import Register from './components/Register/Register.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RoutesGuard from './components/RoutesGuard/RoutesGuard.jsx'
+import Sell from './components/Sell/Sell.jsx'
 
 function App() {
   let routes = createBrowserRouter(
@@ -24,6 +25,8 @@ function App() {
           { path: "agents", element: <Agents /> },
           { index: true, element: <Register /> },
           { path: "home", element: <Home /> },
+          { path: "sell", element: <Sell /> },
+
         ]
       }
     ],

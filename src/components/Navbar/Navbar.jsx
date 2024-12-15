@@ -6,6 +6,8 @@ import { TokenContext } from '../../Context/TokenContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
   const menu = useRef(null);
   const links = useRef(null);
   const { Token, setToken } = useContext(TokenContext)
@@ -82,6 +84,15 @@ export default function Navbar() {
               >
                 <li>Agents</li>
               </NavLink>
+
+              <NavLink
+                to="/sell"
+                className={({ isActive }) =>
+                  isActive ? `${styles.Active}` : ''
+                }
+              >
+                <li>Sell</li>
+              </NavLink>
             </ul>
           </div>
         </div>
@@ -96,11 +107,12 @@ export default function Navbar() {
 
         </div>
 
-        {(window.innerWidth < 603)? 
+        {(window.innerWidth < 603) ?
           <div className={styles.toggle_container}>
             <button className={styles.menu_toggle} onClick={() => setIsMenuOpen(!isMenuOpen)}>☰</button>
-          </div>:<></>
+          </div> : <></>
         }
+
       </div>
     </nav>
   );

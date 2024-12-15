@@ -28,6 +28,8 @@ export default function Home() {
             </select>
           </div>
 
+
+
           <div class={styles.item}>
             <label for="property">Property</label>
             <select name="property" id="property">
@@ -66,6 +68,24 @@ export default function Home() {
             </div>
           </div>
 
+          <div className={styles.addCard}>
+            <div className={styles.imgContainer}>
+              <img src={image} alt="" />
+            </div>
+            <div className={styles.addDesc}>
+              <h3>title</h3>
+              <p>5000000 </p>
+            </div>
+          </div>
+          <div className={styles.addCard}>
+            <div className={styles.imgContainer}>
+              <img src={image} alt="" />
+            </div>
+            <div className={styles.addDesc}>
+              <h3>title</h3>
+              <p>5000000 </p>
+            </div>
+          </div>
           <div className={styles.addCard}>
             <div className={styles.imgContainer}>
               <img src={image} alt="" />
