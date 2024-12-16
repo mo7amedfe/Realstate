@@ -10,7 +10,7 @@ import Register from './components/Register/Register.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RoutesGuard from './components/RoutesGuard/RoutesGuard.jsx'
 import Sell from './components/Sell/Sell.jsx'
-
+import Profile from './components/Profile/profile.jsx'
 function App() {
   let routes = createBrowserRouter(
     [
@@ -26,6 +26,8 @@ function App() {
           { index: true, element: <Register /> },
           { path: "home", element: <Home /> },
           { path: "sell", element: <Sell /> },
+          { path: "Profile", element: <Profile /> },
+
 
         ]
       }

@@ -93,6 +93,15 @@ export default function Navbar() {
               >
                 <li>Sell</li>
               </NavLink>
+           
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive ? `${styles.Active}` : ''
+                }
+              >
+                <li>Profile</li>
+              </NavLink>
             </ul>
           </div>
         </div>

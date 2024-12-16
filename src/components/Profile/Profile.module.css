@@ -1,0 +1,163 @@
+.profileCard {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+}
+
+.profilePicture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profileName {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.profileEmail {
+  font-size: 1rem;
+  color: #777;
+}
+
+.profileBio {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 15px 0;
+}
+
+.editButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editButton:hover {
+  background-color: #0056b3;
+}
+
+.filesInput {
+  width: 80%;
+  text-align: center;
+}
+
+.imageContainer {
+  width: 37%;
+  text-align: center;
+  padding: 0px 10px;
+
+}
+
+.profileData {
+  width: 60%;
+  text-align: center;
+}
+
+.inputContainer {
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width:500px) {
+  .imageContainer {
+
+    width: 100%;
+  }
+
+  .profileData {
+    width: 100%;
+
+  }
+}
+
+@media (max-width:768px) {
+  .imageContainer {
+
+    width: 30%;
+  }
+
+  .profileData {
+    width: 60%;
+
+  }
+}
+
+
+.allAds {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: baseline; */
+  flex-wrap: wrap;
+  padding: 10px 0px;
+
+}
+
+.addCard {
+  width: 22%;
+  padding: 10px;
+  margin: 3px 0px;
+  /* background-color: blueviolet; */
+  border: 2px solid black;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.imgContainer {
+  width: 100%;
+  /* padding:8px; */
+}
+
+.imgContainer img {
+  width: 100%;
+}
+
+.addDesc {
+  /* background-color: brown; */
+  width: 100%;
+  /* padding: 8px; */
+}
+
+.addCard:hover {
+  background-color: rgb(43, 197, 43);
+}
+
+@media (max-width: 993px) {
+  .addCard {
+    width: 28%;
+    /* Adjust to fit two cards in a row */
+    padding: 8px;
+    margin: 5px;
+  }
+}
+
+/* For tablets and medium-sized screens (768px and below) */
+@media (max-width: 768px) {
+  .addCard {
+    width: 40%;
+    /* Adjust to fit two cards in a row */
+    padding: 8px;
+    margin: 5px;
+  }
+}
+
+/* For mobile screens (480px and below) */
+@media (max-width: 480px) {
+  .addCard {
+    width: 100%;
+    /* Adjust to fit one card in a row */
+    padding: 5px;
+    margin: 10px auto;
+    /* Center the card */
+  }
+}

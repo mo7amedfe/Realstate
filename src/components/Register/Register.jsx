@@ -89,7 +89,7 @@ export default function Register() {
 
 
   return (<div className="container">
-    <h2 className="">Register Now:</h2>
+    <h2 className={styles.realstateLayout}>Register Now:</h2>
     <form onSubmit={formik.handleSubmit}>
 
       <div className='w-100 d-flex m-auto flex-wrap padding_y_3'>
@@ -163,7 +163,7 @@ export default function Register() {
 
     </form>
     <h5 className="">If you already have an account, <Link className='text-green' to="/login">Login Now</Link></h5>
-
+        
   </div>
 
 
