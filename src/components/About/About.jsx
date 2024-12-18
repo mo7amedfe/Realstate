@@ -21,6 +21,7 @@ export default function About() {
           successfully deliver on schedule several projects With more projects
           currently being developed.
         </p>
+
       </div>
       <div className={Styles.section2}>
         <h1 className={Styles.eddit1}>MESSAGE FROM THE CHAIRMAN</h1>
