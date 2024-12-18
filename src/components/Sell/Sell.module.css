@@ -1,0 +1,94 @@
+.items {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+.fileInputContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.FilesInput {
+    width: 80% !important;
+}
+
+.previews {
+padding: 0 10%;
+    justify-content: center;
+
+}
+
+.previews img {
+    width: 100px;
+    /* height: auto !important; */
+    margin: 5px;
+}
+
+.item {
+
+    width: 48%;
+    padding: 0px 10px;
+
+}
+
+.item input {
+    width: 96%;
+}
+
+.item select {
+    width: 100%;
+}
+
+.locationSearch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.locationSearch input {
+    width: 80%;
+}
+
+.priceContainer {
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap;
+    
+
+}
+
+.priceInput {
+    width: 65% !important;
+}
+
+.checkBox {
+
+    scale: 2;
+    width: auto !important;
+
+    box-shadow: none !important;
+}
+
+.labelContainer {
+    width: 100%;
+    display: flex;
+    gap: 65%;
+}
+
+textarea {
+    width: 80%;
+}
+
+.btnContainer {
+    padding: 10px 13px;
+}

@@ -1,0 +1,89 @@
+
+.footer {
+  border-top: 1px solid rgb(68, 68, 68);
+    width: 100%;
+    background-color:rgb(255, 255, 255);
+    color: rgb(47, 47, 47);
+    padding: 10px 0;
+    font-family: Arial, sans-serif;
+    
+    
+  }
+  
+  .footerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .footerSubscription {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+ 
+  .footerSubscription p {
+    line-height: 1.6;
+  }
+  
+  .footerForm {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .footerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .footerText {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+  }
+  
+  .footerText p {
+    line-height: 1.6;
+  }
+  
+  .footerImages {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  .imagesContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footerImg {
+    width: 60px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .footerImg:hover {
+    transform: scale(1.1);
+  }
+  
+  .footerCopyright {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+  }
+  
+  .footerForm button{
+    padding:0px 20px !important;
+    /* border-radius: 50%; */
+  }

@@ -1,0 +1,115 @@
+.row {
+    width: 80%;
+    padding-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.locationSearch input {
+    width: 80%;
+}
+
+.container {
+    margin-top: 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: auto; */
+}
+
+
+.items {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+.item {
+    width: 25%;
+    padding: 0px 10px;
+    text-align: center;
+}
+
+.item input {
+    width: 80%;
+}
+
+.item select {
+    width: 90%;
+}
+
+.locationSearch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.allAds {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    /* align-items: baseline; */
+    flex-wrap: wrap;
+    padding: 10px 0px;
+
+}
+
+.addCard {
+    width: 22%;
+    padding: 10px;
+    margin:3px 0px ;
+    /* background-color: blueviolet; */
+    border: 2px solid black;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.imgContainer {
+    width: 100%;
+    /* padding:8px; */
+}
+
+.imgContainer img{
+    width: 100%;
+}
+
+.addDesc {
+    /* background-color: brown; */
+    width: 100%;
+    /* padding: 8px; */
+}
+
+.addCard:hover {
+    background-color: rgb(43, 197, 43);
+}
+
+@media (max-width: 993px) {
+    .addCard {
+      width: 28%; /* Adjust to fit two cards in a row */
+      padding: 8px;
+      margin: 5px;
+    }
+  }
+
+/* For tablets and medium-sized screens (768px and below) */
+@media (max-width: 768px) {
+    .addCard {
+      width: 40%; /* Adjust to fit two cards in a row */
+      padding: 8px;
+      margin: 5px;
+    }
+  }
+  
+  /* For mobile screens (480px and below) */
+  @media (max-width: 480px) {
+    .addCard {
+      width: 100%; /* Adjust to fit one card in a row */
+      padding: 5px;
+      margin: 10px auto; /* Center the card */
+    }
+  }
