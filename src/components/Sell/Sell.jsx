@@ -1,158 +1,257 @@
-
-import React, { useEffect, useState } from 'react';
-import styles from "./Sell.module.css"
+import React, { useContext, useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import styles from "./Sell.module.css";
+import { TokenContext } from '../../Context/TokenContext';
+import axios from 'axios';
+import Footer from '../Footer/footer';
 
 export default function Sell() {
-
-  const [imgs, setImgs] = useState([]);
-
+  const [postImages, setPostImages] = useState([]);  // State to store multiple images
   const [previews, setPreviews] = useState([]);
+  const { Token } = useContext(TokenContext);
+  const [isNegotiationable, setIsNegotiationable] = useState(false)
 
-  useEffect(() => {
-    const newPreviews = imgs.map((img) => URL.createObjectURL(img));
-    setPreviews(newPreviews);
-
-    // Cleanup URLs to prevent memory leaks
-
-    return () => newPreviews.forEach((url) => URL.revokeObjectURL(url));
-  }, [imgs]);
-
-  function handleFileChange(e) {
-
-
-    const selectedFiles = Array.from(e.target.files);
-    const imageFiles = selectedFiles.filter((file) => file.type.startsWith('image/'));
-
-    if (imageFiles.length !== selectedFiles.length) {
-      alert('Only image files are allowed!');
-    }
-
-    setImgs(imageFiles); // Update state only with valid image files
+  function handleCheckBoxClick() {
+    setIsNegotiationable(!isNegotiationable)
   }
 
-  const [text, setText] = useState('');
-  const [wordCount, setWordCount] = useState(0);
+  const formik = useFormik({
+    initialValues: {
+      images: [],
+      title: '',
+      location: '',
+      description: '',
+      property: '',
+      type: '',
+      bedroom: '',
+      area: '',
+      price: '',
+      negotiationable: isNegotiationable,
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required('Title is required'),
+      location: Yup.string().required('Location is required'),
+      description: Yup.string()
+        .max(100, 'You can only enter up to 100 words!')
+        .required('Description is required'),
+      property: Yup.string().required('Property type is required'),
+      type: Yup.string().required('Type is required'),
+      bedroom: Yup.number().required('Bedroom count is required'),
+      area: Yup.number().required('Area is required'),
+      price: Yup.number().required('Price is required'),
+    }),
+    onSubmit: async (values) => {
+      console.log(values);
+      
+      const formData = new FormData();
+      values.images.forEach((file) => formData.append('images', file));
+      formData.append('title', values.title);
+      formData.append('location', values.location);
+      formData.append('description', values.description);
+      formData.append('property', values.property);
+      formData.append('type', values.type);
+      formData.append('bedroom', values.bedroom);
+      formData.append('area', values.area);
+      formData.append('price', values.price);
+      formData.append('negotiationable', isNegotiationable);
 
-  const handleTextAreaChange = (e) => {
-    const inputText = e.target.value;
-    const words = inputText.split(/\s+/).filter((word) => word.length > 0); // Split text into words
-    if (words.length <= 100) {
-      setText(inputText);
-      setWordCount(words.length);
-    } else {
-      alert('You can only enter up to 100 words!');
-    }
+      await axios.post('http://localhost:5000/api/properties/Properties', formData, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => {
+        console.log(res);
+      }).catch(e => {
+        console.log(e);
+
+      })
+
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createPost(postImages);
+    console.log("Uploaded");
+  };
+  const handleFileUpload = async (e) => {
+    const files = e.target.files;
+    const base64Files = await Promise.all(
+      Array.from(files).map((file) => convertToBase64(file))
+    );
+    setPostImages(base64Files);  // Update state with multiple base64 images
   };
 
-  return (
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+
+  return (<>
     <div className="container">
-      <div className={styles.fileInputContainer}>
-        <input
-          onChange={(e) => handleFileChange(e)}
-          type="file"
-          accept="image/*"
-          multiple
-          className={styles.FilesInput}
-        />
-
-
-      </div>
-
-      <div className={styles.previews}>
-        {previews.map((preview, index) => (
-          <img key={index} src={preview} alt={`Preview ${index}`} />
-        ))}
-      </div>
-
-      <div className={styles.locationSearch}>
-        <input type="text" placeholder='Title' />
-
-        <input type="text" placeholder='Location' />
-
-        {/* <button className='btn-green'>Search</button> */}
-        <textarea onClick={(e) => { handleTextAreaChange(e) }} rows={10} cols={1000} placeholder='You can type up to 100 words to describe your add' name="" id=""></textarea>
-
-      </div>
-
-
-
-      <div className={styles.items}>
-
-        <div class={styles.item}>
-          <div className="w-100">
-            <label for="property">Property</label>
-
-          </div>
-
-          <select name="property" id="property">
-            <option value="" selected="">any</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="house">Studio</option>
-            <option value="land">Land</option></select>
+      <form onSubmit={formik.handleSubmit}>
+        <div className={styles.fileInputContainer}>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            className={styles.FilesInput}
+            onChange={handleFileUpload}
+          />
         </div>
 
-
-
-        <div class={styles.item}>
-          <div className="w-100">
-            <label for="type">Type</label>
-
-          </div>
-          <select name="type" id="type">
-            <option value="">any</option>
-            <option value="buy" selected="">Buy</option>
-            <option value="rent">Rent</option>
-          </select>
+        <div className={styles.previews}>
+          {previews.map((preview, index) => (
+            <img key={index} src={preview} alt={`Preview ${index}`} />
+          ))}
         </div>
 
+        <div className={styles.locationSearch}>
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.title && formik.errors.title ? <div>{formik.errors.title}</div> : null}
 
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formik.values.location}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.location && formik.errors.location ? <div>{formik.errors.location}</div> : null}
 
-
-
-        <div class={styles.item}>
-          <div className="w-100">
-            <label for="bedroom">Bedroom</label>
-
-          </div>
-          <input type="number" id="bedroom" name="bedroom" placeholder="any" />
+          <textarea
+            name="description"
+            rows={4}
+            placeholder="You can type up to 100 words to describe your ad"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.description && formik.errors.description ? (
+            <div>{formik.errors.description}</div>
+          ) : null}
         </div>
 
-
-        <div class={styles.item}>
-          <div className="w-100">
-            <label for="Area">Area</label>
-
-          </div>
-          <input type="number" id="Area" name="Area" placeholder="any" />
-        </div>
-
-
-        <div class={`${styles.item}  `}>
-          <div className={`${styles.priceContainer}`}>
-
-            <div className={styles.labelContainer}>
-              <label for="Price">Price </label>
-              {/* <label htmlFor="">negatiationable</label> */}
-            </div>
-
-            <input className={styles.priceInput} type="number" id="Price" name="Price" placeholder="any" />
-            <p>negatiationable</p>
-            <input className={styles.checkBox} type="checkbox" />
-
+        <div className={styles.items}>
+          <div className={styles.item}>
+            <label htmlFor="property">Property</label>
+            <select
+              name="property"
+              id="property"
+              value={formik.values.property}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            >
+              <option value="">Any</option>
+              <option value="apartment">Apartment</option>
+              <option value="house">House</option>
+              <option value="studio">Studio</option>
+              <option value="land">Land</option>
+            </select>
+            {formik.touched.property && formik.errors.property ? (
+              <div>{formik.errors.property}</div>
+            ) : null}
           </div>
 
+          <div className={styles.item}>
+            <label htmlFor="type">Type</label>
+            <select
+              name="type"
+              id="type"
+              value={formik.values.type}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            >
+              <option value="">Any</option>
+              <option value="buy">Buy</option>
+              <option value="rent">Rent</option>
+            </select>
+            {formik.touched.type && formik.errors.type ? <div>{formik.errors.type}</div> : null}
+          </div>
+
+          <div className={styles.item}>
+            <label htmlFor="bedroom">Bedroom</label>
+            <input
+              type="number"
+              name="bedroom"
+              id="bedroom"
+              value={formik.values.bedroom}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.bedroom && formik.errors.bedroom ? (
+              <div>{formik.errors.bedroom}</div>
+            ) : null}
+          </div>
+
+          <div className={styles.item}>
+            <label htmlFor="area">Area</label>
+            <input
+              type="number"
+              name="area"
+              id="area"
+              value={formik.values.area}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.area && formik.errors.area ? <div>{formik.errors.area}</div> : null}
+          </div>
+
+          <div className={styles.item}>
+            <label htmlFor="price">Price</label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              value={formik.values.price}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.price && formik.errors.price ? <div>{formik.errors.price}</div> : null}
+            <label>
+              <input
+                type="checkbox"
+                name="negotiationable"
+                onClick={() => {
+                  handleCheckBoxClick
+                }}
+
+                // onChange={formik.handleChange}
+                onChange={handleCheckBoxClick}
+
+              />
+              Negotiationable
+            </label>
+          </div>
         </div>
 
-
-
-      </div>
-
-      <div className={styles.btnContainer}>
-        <button className='btn-green'>Publish</button>
-      </div>
-
-
+        <div className={styles.btnContainer}>
+          <button type="submit" className="btn-green">
+            Publish
+          </button>
+        </div>
+      </form>
     </div>
+    <Footer />
+
+  </>
   );
 }

@@ -5,11 +5,13 @@ import { useFormik } from 'formik'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { TokenContext } from '../../Context/TokenContext';
+import { jwtDecode } from 'jwt-decode';
+import Footer from '../Footer/footer';
 
 
 
 export default function Login() {
-  const { Token, setToken } = useContext(TokenContext)
+  const { Token, setToken, decoded, setDecoded } = useContext(TokenContext)
   let navigate = useNavigate()
   const [error, setError] = useState(null)
   const [resMessage, setResMessage] = useState(null)
@@ -57,10 +59,14 @@ export default function Login() {
 
   async function login(values) {
     setIsLoading(true)
-    return await axios.post(" https://ecommerce.routemisr.com/api/v1/auth/signin", values).then((res) => {
-      console.log(res)
+    return await axios.post("http://localhost:5000/api/users/login", values).then((res) => {
+      console.log(res.data.role)
       localStorage.setItem("Token", res.data.token)
       setToken(res.data.token)
+      if (res.data.role == "admin") {
+
+
+      }
       setResMessage(res.data.message)
       setIsLoading(false)
       navigate("/home")
@@ -75,7 +81,7 @@ export default function Login() {
 
 
 
-  return (
+  return (<>
     <div className="container">
       <h2 className="">Login Now:</h2>
       <form onSubmit={formik.handleSubmit}>
@@ -128,7 +134,7 @@ export default function Login() {
       <h5 className="">If you don't have an account, <Link className='text-green' to="/register">Register Now</Link></h5>
 
     </div>
-
-
+    <Footer />
+  </>
   )
 }

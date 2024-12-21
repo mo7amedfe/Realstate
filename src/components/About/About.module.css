@@ -1,1 +1,119 @@
-.About {}
+.Container{
+    padding: 90px 0 0 0;
+    margin: auto;
+    width: 95%;
+    
+
+}
+
+.section1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 40px 20px ;
+    border-radius: 40px;
+}
+
+.section2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px ;
+}
+
+
+.section3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 100px 20px ;
+    border-radius: 40px;
+}
+
+.eddit2{
+    padding: 100px;
+
+}
+
+.m{
+    margin-top: 40px;
+}
+
+.itm1{
+    width: 30% ;
+    box-shadow: 3px 3px 15px 0 rgba(0,0,0,0.3);
+    border-radius: 20px;
+    padding: 30px 10px;
+    
+}
+.itm1:hover {
+    background-color:gray;
+}
+.itm1:hover h2 {
+   color: white;
+}
+.itm1:hover p {
+    color: white;
+ }
+
+.itm2{
+    width: 30% ;
+    box-shadow: 3px 3px 15px 0 rgba(0,0,0,0.3);
+    border-radius: 20px;
+    padding: 10px;
+}
+.itm2:hover {
+    background-color: gray;
+}
+.itm2:hover h2 {
+    color: white;
+ }
+ .itm2:hover p {
+     color: white;
+  }
+
+.itm3{
+    width: 35%;
+}
+
+@media (max-width: 1024px) {
+    .section1, .section2, .section3 {
+        flex-direction: column;
+        padding: 50px 20px;
+    }
+
+    .itm1, .itm2, .itm3 {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .Container {
+        width: 100%;
+        padding: 50px 10px;
+    }
+
+    .itm1, .itm2, .itm3 {
+        width: 100%; 
+    }
+
+    .section1, .section2, .section3 {
+        padding: 30px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .itm1, .itm2, .itm3 {
+        padding: 20px 5px;
+    }
+}

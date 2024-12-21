@@ -3,6 +3,7 @@ import styles from './Register.module.css'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Footer from '../Footer/footer'
 
 export default function Register() {
 
@@ -27,16 +28,16 @@ export default function Register() {
     } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(values.password)) {
       errors.password = "Password must be at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character."
     }
-    if (!values.rePassword) {
-      errors.rePassword = "rePassword is required"
-    } else if (values.password != values.rePassword) {
-      errors.rePassword = "password not match"
+    if (!values.repassword) {
+      errors.repassword = "repassword is required"
+    } else if (values.password != values.repassword) {
+      errors.repassword = "password not match"
     }
 
-    if (!values.phone) {
-      errors.phone = "phone is required"
-    } else if (!/^(002)?01[0125][0-9]{8}$/i.test(values.phone)) {
-      errors.phone = "Invalid phone number."
+    if (!values.phoneNumber) {
+      errors.phoneNumber = "phoneNumber is required"
+    } else if (!/^(002)?01[0125][0-9]{8}$/i.test(values.phoneNumber)) {
+      errors.phoneNumber = "Invalid phoneNumber number."
     }
     return errors
   }
@@ -48,8 +49,9 @@ export default function Register() {
       name: "",
       email: "",
       password: "",
-      rePassword: "",
-      phone: ""
+      repassword: "",
+      phoneNumber: "",
+      role:"admin"
 
     },
 
@@ -69,8 +71,8 @@ export default function Register() {
 
   async function register(values) {
     setIsLoading(true)
-    // return await axios.post("http://localhost:5000/api/users/register", values).then((res) => {
-    return await axios.post(" https://ecommerce.routemisr.com/api/v1/auth/signup", values).then((res) => {
+    return await axios.post("http://localhost:5000/api/users/register", values).then((res) => {
+    // return await axios.post(" https://ecommerce.routemisr.com/api/v1/auth/signup", values).then((res) => {
 
      
       console.log(res)
@@ -88,7 +90,9 @@ export default function Register() {
 
 
 
-  return (<div className="container">
+  return (
+  <>
+  <div className="container">
     <h2 className="">Register Now:</h2>
     <form onSubmit={formik.handleSubmit}>
 
@@ -121,21 +125,21 @@ export default function Register() {
 
           </div> : ""}
 
-        <label htmlFor="">rePassword</label>
-        <input type="password" name='rePassword' value={formik.values.rePassword} onClick={() => { setError(null), setResMessage(null) }} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='********' required />
-        {formik.touched.rePassword && formik.errors.rePassword ?
+        <label htmlFor="">repassword</label>
+        <input type="password" name='repassword' value={formik.values.repassword} onClick={() => { setError(null), setResMessage(null) }} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='********' required />
+        {formik.touched.repassword && formik.errors.repassword ?
           <div className='errorDiv'>
 
-            <p><span >alert!</span> {formik.errors.rePassword}</p>
+            <p><span >alert!</span> {formik.errors.repassword}</p>
 
           </div> : ""}
 
-        <label htmlFor="">phone</label>
-        <input type="tel" name='phone' value={formik.values.phone} onClick={() => { setError(null), setResMessage(null) }} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='+## ###########' required />
-        {formik.touched.phone && formik.errors.phone ?
+        <label htmlFor="">phoneNumber</label>
+        <input type="tel" name='phoneNumber' value={formik.values.phoneNumber} onClick={() => { setError(null), setResMessage(null) }} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder='+## ###########' required />
+        {formik.touched.phoneNumber && formik.errors.phoneNumber ?
           <div className='errorDiv'>
 
-            <p><span >alert!</span> {formik.errors.phone}</p>
+            <p><span >alert!</span> {formik.errors.phoneNumber}</p>
 
           </div> : ""
         }
@@ -165,7 +169,8 @@ export default function Register() {
     <h5 className="">If you already have an account, <Link className='text-green' to="/login">Login Now</Link></h5>
 
   </div>
-
+  <Footer/>
+  </>
 
   )
 }

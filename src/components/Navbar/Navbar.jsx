@@ -3,10 +3,13 @@ import styles from './Navbar.module.css';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import logo from "./../../assets/Screenshot 2024-12-10 025803.png"
 import { TokenContext } from '../../Context/TokenContext';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+
+  const [isAdmin, setisAdmin] = useState(false)
 
   const menu = useRef(null);
   const links = useRef(null);
@@ -23,7 +26,19 @@ export default function Navbar() {
         links.current.style.left = '100%';
       }
     }
-  }, [isMenuOpen]);
+    
+    if (Token) {
+      let decoded = jwtDecode(Token)
+      if (decoded.role === "admin") {
+        setisAdmin(true)
+      } else {
+        setisAdmin(false)
+      }
+      console.log(isAdmin);
+      
+    }
+
+  }, [isMenuOpen, Token]);
 
   const navigate = useNavigate();
 
@@ -37,11 +52,14 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("Token")
     setToken(null)
+    setisAdmin(false)
     handleLogin()
+
 
   };
 
   return (
+
     <nav>
       <div className={styles.navbar}>
         <div className={styles.navbar_logo}>
@@ -68,31 +86,34 @@ export default function Navbar() {
               >
                 <li>About</li>
               </NavLink>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  isActive ? `${styles.Active}` : ''
-                }
-              >
-                <li>Contact</li>
-              </NavLink>
-              <NavLink
-                to="/agents"
-                className={({ isActive }) =>
-                  isActive ? `${styles.Active}` : ''
-                }
-              >
-                <li>Agents</li>
-              </NavLink>
 
-              <NavLink
-                to="/sell"
+           { isAdmin?  <NavLink
+                to="/admin"
                 className={({ isActive }) =>
                   isActive ? `${styles.Active}` : ''
                 }
               >
-                <li>Sell</li>
+                <li>Admin</li>
+              </NavLink>:<></>}
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive ? `${styles.Active}` : ''
+                }
+              >
+                <li>Profile</li>
               </NavLink>
+              {Token ?
+                <NavLink
+                  to="/sell"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.Active}` : ''
+                  }
+                >
+                  <li>Sell</li>
+                </NavLink>
+
+                : <></>}
             </ul>
           </div>
         </div>

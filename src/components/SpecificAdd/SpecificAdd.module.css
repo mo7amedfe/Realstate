@@ -1,0 +1,108 @@
+.sliderContainer {
+    width: 25%;
+
+    margin: 0% 2%;
+}
+
+.row {
+    display: flex;
+    /* flex-wrap: wrap; */
+    width: 100%;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.addDetails {
+    padding: 10px 20px;
+    width: 73%;
+    /* text-align: center; */
+}
+
+.addDetails h4 i {
+    color: rgb(255, 191, 0);
+}
+.desc{
+border-bottom: 2px solid;
+padding-bottom: 15px;
+}
+.specs {
+    width: 100%;
+    display: flex;
+    ;
+}
+
+.spec {
+
+    width: 20%;
+    text-align: center;
+
+    border-right: 2px solid;
+}
+
+.seller{
+    /* background-color: gray; */
+width: 100%;
+border-top: 2px solid;
+margin-top: 20px;
+}
+.seller h5{
+    display: flex;
+    align-items: center;
+}
+.seller h5 span{
+    margin-left: 4px;
+    font-weight: bold;
+}
+.seller h3{
+/* border-bottom: 2px solid; */
+}
+
+
+
+@media(min-width:0px) and (max-width: 992px)  {
+    .row{
+        flex-wrap: wrap;
+    }
+    .sliderContainer {
+      width: 100%; /* Full-width slider for very small screens */
+    }
+    .addDetails{
+        width: 100%;
+    }
+    .specs{
+        flex-wrap: wrap;
+        flex-direction: row !important;
+    }
+  .spec{
+    width: 100%;
+    border-right: 0px;
+    border-bottom: 2px solid;
+  }
+    .addDetails h2 {
+      font-size: 18px; /* Adjust title size */
+    }
+  
+    .addDetails h4 {
+      font-size: 14px; /* Adjust location text size */
+    }
+  
+    .addDetails p {
+      font-size: 12px; /* Adjust description text size */
+    }
+  
+    .spec h3 {
+      font-size: 14px; /* Adjust spec title size */
+    }
+  
+    .spec p {
+      font-size: 12px; /* Adjust spec description size */
+    }
+  
+    .seller h3, .seller h5 {
+      font-size: 14px; /* Adjust seller info text size */
+    }
+  
+    .seller h5 {
+      margin-left: 0;
+    }
+  }
