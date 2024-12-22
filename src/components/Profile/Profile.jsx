@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Profile.module.css";
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 import { TokenContext } from "../../Context/TokenContext";
 import { jwtDecode } from "jwt-decode";
 import Footer from "../Footer/footer";
